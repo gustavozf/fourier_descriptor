@@ -57,21 +57,15 @@ def find_edge_pixels(img):
     output_list = []
 
     first_pixel = find_first_white_pixel(img)
-    print(first_pixel)
     output_img[first_pixel] = MAX_VALUE
     output_list.append(first_pixel)
 
     neighbors = get_neighbors(img, output_img, first_pixel)
 
-    #i = 0
     while neighbors:
-        #print(neighbors)
         output_img[neighbors[0]] = MAX_VALUE
-        #cv2.imwrite(f'out_{i}.png', output_img)
         output_list.append(neighbors[0])
         neighbors = get_neighbors(img, output_img, neighbors[0])
-
-        #i += 1
 
     return np.array(output_list), output_img
 
