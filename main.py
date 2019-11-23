@@ -9,11 +9,15 @@ output_shape = np.zeros(x.shape[:2])
 
 list_edge, output_img = find_edge_pixels(x)
 complex_list = to_complex_number(list_edge)
-list_fourier = fft(complex_list, 20)
+list_fourier = fft(complex_list, 2)
 output_list = complex_to_number(list_fourier)
 
-output_shape[output_list] = 255
+
+for pixel in output_list:
+    output_shape[pixel[0], pixel[1]] = 255
+
+print(cv2.countNonZero(output_shape))
+#output_shape[output_list] = 255
 
 cv2.imwrite('out.png', output_img)
 cv2.imwrite('out_shape.png', output_shape)
-print(list_edge)
